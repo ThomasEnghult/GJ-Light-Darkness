@@ -5,13 +5,16 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform target;
-
     [SerializeField] private Vector3 offset;
-
     [SerializeField, Range(0, 1f)] private float maxDelta;
+
+    public Vector3 LookAtPosition { get; set; }
     
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, (target.position + offset), maxDelta);
+        Vector3 pos = target.position;
+        pos = (pos + LookAtPosition) / 2;
+        
+        transform.position = pos + offset;
     }
 }
