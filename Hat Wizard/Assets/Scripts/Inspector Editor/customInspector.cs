@@ -16,12 +16,12 @@ using System.Runtime.CompilerServices;
 
         if(GUILayout.Button("Spawn Enemies Type 1"))
         {
-            enemySpawner.spawnEnemy(enemySpawner.nrEnemy, enemySpawner.enemyPrefab1.name);
+            enemySpawner.spawnEnemy(enemySpawner.nrEnemy, 0);
         }
 
         if(GUILayout.Button("Spawn Enemies Type 2"))
         {
-            enemySpawner.spawnEnemy(enemySpawner.nrEnemy, enemySpawner.enemyPrefab2.name);
+            enemySpawner.spawnEnemy(enemySpawner.nrEnemy, 1);
         }
 
         

@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {    
-    private float enemySpeed = 3f;
-    private int enemyHP = 3;
+    private float enemySpeed = 1f;
+    private int enemyHP = 1;
+    public int enemyID = 0;
 
     private GameObject player;    
 
+
+    public int getEnemyID(){
+        return enemyID;
+    }
+    
     public int getEnemyHP(){
         return enemyHP;
     }
@@ -17,6 +23,11 @@ public class EnemyBehaviour : MonoBehaviour
         return enemySpeed;
     }
 
+    
+    public void setEnemyID(int enemyID)
+    {
+        this.enemyID = enemyID;
+    }
 
     public void setEnemyHP(int enemyHP){
         this.enemyHP = enemyHP;

@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{
-    
-    void OnCollisionEnter(Collision collision){
+{   
+    float hpDeductTime = 0.5f;
+    float nextHPDeductTime;
+    void OnCollisionStay(Collision collision){
         
-        //Debug.Log(collision.transform.name);
-        collision.transform.GetComponent<EnemyBehaviour>().damageEnemy(1);
+        float currentTime = Time.time;
 
+        if(currentTime > nextHPDeductTime)
+        {
+            collision.transform.GetComponent<EnemyBehaviour>().damageEnemy(1);
+            nextHPDeductTime = currentTime + hpDeductTime;
+        }
     }
 
 
