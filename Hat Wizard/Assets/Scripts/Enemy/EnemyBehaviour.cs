@@ -4,10 +4,27 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {    
-    [SerializeField, Range(0,6)] private float enemySpeed = 3f;
-    [SerializeField, Range(1,50)] private int enemyHP = 3;
+    private float enemySpeed = 3f;
+    private int enemyHP = 3;
 
     private GameObject player;    
+
+    public int getEnemyHP(){
+        return enemyHP;
+    }
+    
+    public float getEnemySpeed(){
+        return enemySpeed;
+    }
+
+
+    public void setEnemyHP(int enemyHP){
+        this.enemyHP = enemyHP;
+    }
+    
+    public void setEnemySpeed(float enemySpeed){
+        this.enemySpeed = enemySpeed;
+    }
 
     //Move enemies on the screen towards the player at {enemySpeed}
     void moveToPlayer(){

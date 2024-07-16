@@ -11,11 +11,14 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [SerializeField, Range(0,40)] private float minRadius, maxRadius;
-    [SerializeField, Range(0, 80)] private int nrEnemy;
+    [SerializeField, Range(0, 80)] public int nrEnemy;
     [SerializeField, Range(0,80)] private int preLoadedEnemies;
     
     private GameObject enemyList;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] public GameObject enemyPrefab1;
+    [SerializeField] public GameObject enemyPrefab2;
+    [SerializeField] private int enemy1HP = 2;
+    [SerializeField] private int enemy2HP = 4;
     
     
    // public GameObject enemyPrefab;
@@ -24,14 +27,21 @@ public class EnemySpawner : MonoBehaviour
     //Load a predetermined number of enemies
     void preLoadEnmies(){
         for (int i = 0; i < preLoadedEnemies; i++){
-            GameObject enemy = Instantiate(enemyPrefab);
-            enemy.transform.parent = enemyList.transform;
-            enemy.AddComponent<EnemyBehaviour>();
-            enemy.SetActive(false);
+            GameObject enemy = Instantiate(enemyPrefab1);
+            enemy.name = enemyPrefab1.name;                         //Set name of the spawned enemy the same as the prefabs
+            enemy.transform.parent = enemyList.transform;           //Add enemy to {enemyList}
+            enemy.AddComponent<EnemyBehaviour>();                   //Add enemy Behaviour
+            enemy.SetActive(false);                                 //Disable enemy
+
+            enemy = Instantiate(enemyPrefab2);                 
+            enemy.name = enemyPrefab2.name;                         //Set name of the spawned enemy the same as the prefabs
+            enemy.transform.parent = enemyList.transform;           //Add enemy to {enemyList}
+            enemy.AddComponent<EnemyBehaviour>();                   //Add enemy Behaviour
+            enemy.SetActive(false);                                 //Disable enemy
         }
     }
 
-    public void spawnEnemy(int amount){
+    public void spawnEnemy(int amount, string type){
         
        /* for (int i = 0; i < amount; i++){
        
@@ -42,7 +52,11 @@ public class EnemySpawner : MonoBehaviour
        
         int enemySpawned = 0;
         foreach(Transform enemyTransform in enemyList.transform){
-           
+
+           if (enemyTransform.name != type){
+            continue;
+           }
+
            if(enemySpawned >= amount){
             return;
            }
@@ -54,8 +68,19 @@ public class EnemySpawner : MonoBehaviour
 
             Vector3 spawnPos = player.transform.position.RandomPointInAnnulus(minRadius, maxRadius);
             enemy.transform.position = spawnPos;
+            
+            switch(type)
+            {
+                case var value when value == enemyPrefab1.name:
+                    enemyTransform.GetComponent<EnemyBehaviour>().setEnemyHP(enemy1HP);
+                break;
+                
+                case var value when value == enemyPrefab2.name:
+                    enemyTransform.GetComponent<EnemyBehaviour>().setEnemyHP(enemy2HP);
+                break;
+            }
+
             enemy.SetActive(true);
-           
             enemySpawned++;
             
         }
@@ -70,7 +95,8 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {   
         player = GameObject.Find("Player");
-        spawnEnemy(nrEnemy);
+        spawnEnemy(nrEnemy, enemyPrefab1.name);
+        //spawnEnemy(nrEnemy,squareEnemyPrefab);
     }
 
     // Update is called once per frame
