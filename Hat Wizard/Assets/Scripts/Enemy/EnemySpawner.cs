@@ -11,12 +11,27 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [SerializeField, Range(0,40)] private float minRadius, maxRadius;
+    [SerializeField, Range(0, 80)] private int nrEnemy;
+    [SerializeField, Range(0,80)] private int preLoadedEnemies;
     
     private GameObject enemyList;
+    [SerializeField] private GameObject enemyPrefab;
+    
+    
    // public GameObject enemyPrefab;
-    private GameObject player;
+   private GameObject player;
 
-    void spawnEnemy(int amount){
+    //Load a predetermined number of enemies
+    void preLoadEnmies(){
+        for (int i = 0; i < preLoadedEnemies; i++){
+            GameObject enemy = Instantiate(enemyPrefab);
+            enemy.transform.parent = enemyList.transform;
+            enemy.AddComponent<EnemyBehaviour>();
+            enemy.SetActive(false);
+        }
+    }
+
+    public void spawnEnemy(int amount){
         
        /* for (int i = 0; i < amount; i++){
        
@@ -46,12 +61,16 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+
+    void Awake(){
+        enemyList = GameObject.Find("Enemy List");
+        preLoadEnmies();
+    }
     // Start is called before the first frame update
     void Start()
     {   
         player = GameObject.Find("Player");
-        enemyList = GameObject.Find("Enemy List");
-        spawnEnemy(10);
+        spawnEnemy(nrEnemy);
     }
 
     // Update is called once per frame
