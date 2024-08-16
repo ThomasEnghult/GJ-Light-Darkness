@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0f95954c328d54889689ec66709e9b, type: 3}
   m_Name: Square
   m_EditorClassIdentifier: 
-  enemyHP: 0
-  enemySpeed: 0
-  enemyPrefab: {fileID: 0}
+  enemyID: 1
+  enemyHP: 4
+  enemySpeed: 4
+  enemyPrefab: {fileID: 7726100103767946519, guid: 4e701ec96396e5f489fdbe7217dc1926,
+    type: 3}

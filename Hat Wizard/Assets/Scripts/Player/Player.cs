@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     void OnCollisionStay(Collision collision){
         
         float currentTime = Time.time;
-
         if(currentTime > nextHPDeductTime)
         {
             collision.transform.GetComponent<EnemyBehaviour>().damageEnemy(1);

@@ -14,12 +14,12 @@ using System.Runtime.CompilerServices;
 
         EnemySpawner enemySpawner = (EnemySpawner) target;
 
-        if(GUILayout.Button("Spawn Enemies Type 1"))
+        if(GUILayout.Button("Spawn Enemies Type 0"))
         {
             enemySpawner.spawnEnemy(enemySpawner.nrEnemy, 0);
         }
 
-        if(GUILayout.Button("Spawn Enemies Type 2"))
+        if(GUILayout.Button("Spawn Enemies Type 1"))
         {
             enemySpawner.spawnEnemy(enemySpawner.nrEnemy, 1);
         }

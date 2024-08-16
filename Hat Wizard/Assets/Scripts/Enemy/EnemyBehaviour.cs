@@ -47,10 +47,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void damageEnemy(int dmg){
         enemyHP -= dmg;
-        Debug.Log($"Enemy Damaged {enemyHP} HP Left!");
+        //Debug.Log($"Enemy Damaged {enemyHP} HP Left!");
         if(enemyHP <= 0){
             transform.gameObject.SetActive(false);
-            Debug.Log("Enemy Killed");
+            //Debug.Log("Enemy Killed");
         }
     }
 

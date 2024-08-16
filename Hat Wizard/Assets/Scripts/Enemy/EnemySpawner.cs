@@ -14,9 +14,9 @@ public class EnemySpawner : MonoBehaviour
 
     private List<EnemyGroup> enemyTypes = new List<EnemyGroup>();
 
-    private GameObject enemyList;
-    private GameObject player;
-
+    GameObject enemyList, player;
+    float nextEnemySpawnTime;
+    int timeElapsed;
 
     //Load a predetermined number of enemies
     void preLoadEnemies()
@@ -46,9 +46,10 @@ public class EnemySpawner : MonoBehaviour
                 return;
             }
 
-            if (enemyID != enemyTransform.gameObject.GetComponent<EnemyBehaviour>().getEnemyID()){
+            if (enemyID != enemyTransform.gameObject.GetComponent<EnemyBehaviour>().getEnemyID())
+            {
                 continue;
-            }            
+            }
 
             //Spawn only disabled enemies
             GameObject enemy = enemyTransform.gameObject;
@@ -64,12 +65,24 @@ public class EnemySpawner : MonoBehaviour
             //Assign enemyStats based on enemyType
             EnemyBehaviour enemyStats = enemyTransform.GetComponent<EnemyBehaviour>();
             enemyStats.setEnemyHP(enemyTypes[enemyID].enemyHP);
-            enemyStats.setEnemySpeed(enemyTypes[enemyID].enemySpeed);               
+            enemyStats.setEnemySpeed(enemyTypes[enemyID].enemySpeed);
 
             enemy.SetActive(true);
             enemySpawned++;
 
         }
+    }
+
+    void spawnEnemy(int amount, int enemyID, float rate)
+    {
+        float currentTime = Time.time;
+
+        if (currentTime > nextEnemySpawnTime)
+        {
+            spawnEnemy(amount, enemyID);
+            nextEnemySpawnTime = currentTime + rate;
+        }
+
     }
 
     void GetEnemiesFromFolder()
@@ -94,15 +107,28 @@ public class EnemySpawner : MonoBehaviour
     {
         player = GameObject.Find("Player");
         enemyList = GameObject.Find("Enemy List");
-
         GetEnemiesFromFolder();
-        preLoadEnemies();        
+        preLoadEnemies();
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        timeElapsed = (int)Time.time;
+        Debug.Log(timeElapsed);
 
+        switch(timeElapsed){
+            case 20:
+            spawnEnemy(5, 1, 2);
+            break;            
+        }
+
+        
+        if(timeElapsed > 10){
+            spawnEnemy(2, 1, 1);
+        }
+        spawnEnemy(2, 0, 1);
+            
     }
 
     void OnDrawGizmosSelected()

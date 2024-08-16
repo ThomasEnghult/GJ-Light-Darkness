@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d0f95954c328d54889689ec66709e9b, type: 3}
   m_Name: Sphere
   m_EditorClassIdentifier: 
+  enemyID: 0
   enemyHP: 2
   enemySpeed: 2
+  enemyPrefab: {fileID: 4427989983262775510, guid: 0ac49e0f1d7b25440be9647d8906cca1,
+    type: 3}
